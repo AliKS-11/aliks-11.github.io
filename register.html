@@ -1,0 +1,399 @@
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Продажа подписок</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        let prices = {
+            yandex: 200,
+            gis: 150,
+            avito: 300
+        };
+
+        let orders = [];
+        let recommendations = JSON.parse(localStorage.getItem('recommendations')) || [];
+        let ads = JSON.parse(localStorage.getItem('ads')) || [];
+
+        function calculateTotal() {
+            const yandexReviews = document.getElementById('yandex-reviews').value;
+            const gisReviews = document.getElementById('gis-reviews').value;
+            const avitoReviews = document.getElementById('avito-reviews').value;
+
+            const total = (yandexReviews * prices.yandex) + (gisReviews * prices.gis) + (avitoReviews * prices.avito);
+            document.getElementById('total-amount').innerText = total + ' рублей';
+        }
+
+        function addToCart() {
+            const yandexReviews = document.getElementById('yandex-reviews').value;
+            const gisReviews = document.getElementById('gis-reviews').value;
+            const avitoReviews = document.getElementById('avito-reviews').value;
+
+            const cartItems = [
+                { name: 'Отзывы в Яндекс картах', quantity: yandexReviews, price: prices.yandex },
+                { name: 'Отзывы в 2ГИС', quantity: gisReviews, price: prices.gis },
+                { name: 'Отзывы переговоры в Авито', quantity: avitoReviews, price: prices.avito }
+            ];
+
+            let cartHTML = '';
+            cartItems.forEach(item => {
+                if (item.quantity > 0) {
+                    cartHTML += `<li>${item.name}: ${item.quantity} x ${item.price} рублей</li>`;
+                }
+            });
+
+            document.getElementById('cart-items').innerHTML = cartHTML;
+            calculateTotal();
+        }
+
+        function pay() {
+            const totalAmount = document.getElementById('total-amount').innerText.replace(' рублей', '');
+            showPaymentModal(totalAmount);
+        }
+
+        function updatePrices() {
+            prices.yandex = document.getElementById('admin-yandex-price').value;
+            prices.gis = document.getElementById('admin-gis-price').value;
+            prices.avito = document.getElementById('admin-avito-price').value;
+            alert('Цены обновлены');
+        }
+
+        function toggleAdminMode() {
+            const adminLoginSection = document.getElementById('admin-login-section');
+            adminLoginSection.classList.toggle('hidden');
+        }
+
+        function adminLogin() {
+            const username = document.getElementById('admin-username').value;
+            const password = document.getElementById('admin-password').value;
+
+            if (username === 'ALi' && password === 'ALi') {
+                document.getElementById('admin-section').classList.remove('hidden');
+                document.getElementById('admin-login-section').classList.add('hidden');
+                displayOrders();
+                displayRecommendations();
+                displayAds();
+            } else {
+                alert('Неверный логин или пароль');
+            }
+        }
+
+        function displayOrders() {
+            let ordersHTML = '';
+            orders.forEach((order, index) => {
+                ordersHTML += `
+                    <div class="border p-4 mb-4">
+                        <h3 class="font-bold">Заказ ${index + 1}</h3>
+                        <p>Отзывы в Яндекс картах: ${order.yandexReviews}</p>
+                        <p>Отзывы в 2ГИС: ${order.gisReviews}</p>
+                        <p>Отзывы переговоры в Авито: ${order.avitoReviews}</p>
+                        <p>Итоговая сумма: ${order.totalAmount}</p>
+                    </div>
+                `;
+            });
+            document.getElementById('admin-orders').innerHTML = ordersHTML;
+        }
+
+        function sendOrderToTelegram(order) {
+            const token = 'YOUR_TELEGRAM_BOT_TOKEN';
+            const chatId = 'YOUR_TELEGRAM_CHAT_ID';
+            const message = `
+                Новый заказ:
+                Отзывы в Яндекс картах: ${order.yandexReviews}
+                Отзывы в 2ГИС: ${order.gisReviews}
+                Отзывы переговоры в Авито: ${order.avitoReviews}
+                Итоговая сумма: ${order.totalAmount}
+            `;
+
+            const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok) {
+                        console.log('Заказ отправлен в Telegram');
+                    } else {
+                        console.error('Ошибка при отправке заказа в Telegram', data);
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка при отправке заказа в Telegram', error);
+                });
+        }
+
+        function showPaymentModal(totalAmount) {
+            const paymentModal = document.getElementById('payment-modal');
+            const paymentAmount = document.getElementById('payment-amount');
+            paymentAmount.innerText = totalAmount + ' рублей';
+            paymentModal.classList.remove('hidden');
+        }
+
+        function closePaymentModal() {
+            const paymentModal = document.getElementById('payment-modal');
+            paymentModal.classList.add('hidden');
+        }
+
+        function processPayment() {
+            const totalAmount = document.getElementById('total-amount').innerText.replace(' рублей', '');
+            const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+
+            // Здесь вы можете добавить код для обработки платежа через API ЮKassa
+            fetch('https://api.yookassa.ru/v3/payments', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Basic ' + btoa('shopId:secretKey')
+                },
+                body: JSON.stringify({
+                    amount: {
+                        value: totalAmount,
+                        currency: 'RUB'
+                    },
+                    payment_method_data: {
+                        type: paymentMethod
+                    },
+                    confirmation: {
+                        type: 'redirect',
+                        return_url: 'https://your-website.com/return_url'
+                    },
+                    description: 'Оплата заказа'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'pending') {
+                    window.location.href = data.confirmation.confirmation_url;
+                } else {
+                    alert('Ошибка при обработке платежа');
+                }
+            })
+            .catch(error => {
+                console.error('Ошибка при обработке платежа', error);
+            });
+
+            closePaymentModal();
+        }
+
+        function handlePaymentSuccess() {
+            const yandexReviews = document.getElementById('yandex-reviews').value;
+            const gisReviews = document.getElementById('gis-reviews').value;
+            const avitoReviews = document.getElementById('avito-reviews').value;
+            const totalAmount = document.getElementById('total-amount').innerText;
+
+            const order = {
+                yandexReviews,
+                gisReviews,
+                avitoReviews,
+                totalAmount
+            };
+
+            orders.push(order);
+            displayOrders();
+            sendOrderToTelegram(order);
+        }
+
+        function addRecommendation() {
+            const recommendationText = document.getElementById('recommendation-text').value;
+            const recommendationImage = document.getElementById('recommendation-image').files[0];
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                recommendations.push({
+                    text: recommendationText,
+                    image: e.target.result
+                });
+                localStorage.setItem('recommendations', JSON.stringify(recommendations));
+                displayRecommendations();
+            };
+            reader.readAsDataURL(recommendationImage);
+        }
+
+        function displayRecommendations() {
+            let recommendationsHTML = '';
+            recommendations.forEach((rec, index) => {
+                recommendationsHTML += `
+                    <div class="border p-4 mb-4">
+                        <img src="${rec.image}" alt="Recommendation Image" class="w-full h-auto mb-4">
+                        <p>${rec.text}</p>
+                        <button class="bg-red-500 text-white p-2 rounded" onclick="deleteRecommendation(${index})">Удалить</button>
+                    </div>
+                `;
+            });
+            document.getElementById('recommendations').innerHTML = recommendationsHTML;
+        }
+
+        function deleteRecommendation(index) {
+            recommendations.splice(index, 1);
+            localStorage.setItem('recommendations', JSON.stringify(recommendations));
+            displayRecommendations();
+        }
+
+        function addAd() {
+            const adText = document.getElementById('ad-text').value;
+            const adImage = document.getElementById('ad-image').files[0];
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                ads.push({
+                    text: adText,
+                    image: e.target.result
+                });
+                localStorage.setItem('ads', JSON.stringify(ads));
+                displayAds();
+            };
+            reader.readAsDataURL(adImage);
+        }
+
+        function displayAds() {
+            let adsHTML = '';
+            ads.forEach((ad, index) => {
+                adsHTML += `
+                    <div class="border p-4 mb-4">
+                        <img src="${ad.image}" alt="Ad Image" class="w-full h-auto mb-4">
+                        <p>${ad.text}</p>
+                        <button class="bg-red-500 text-white p-2 rounded" onclick="deleteAd(${index})">Удалить</button>
+                    </div>
+                `;
+            });
+            document.getElementById('ads').innerHTML = adsHTML;
+        }
+
+        function deleteAd(index) {
+            ads.splice(index, 1);
+            localStorage.setItem('ads', JSON.stringify(ads));
+            displayAds();
+        }
+    </script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center px-4">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl mt-10">
+        <div class="flex items-center mb-6">
+            <img src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-BVbpSZmLndA7MfHIxv2ahIKS/user-IBY8IaMXtVn7IVIdZeyvjx16/img-WVNyjERpjTKtREndnXbBYkNc.png?st=2024-09-05T07%3A33%3A22Z&se=2024-09-05T09%3A33%3A22Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-09-04T22%3A59%3A34Z&ske=2024-09-05T22%3A59%3A34Z&sks=b&skv=2024-08-04&sig=2TGDUCGdsFK%2B6hx5GmEnTiRKBtXU8a42WYPrEHGRs3U%3D" alt="Аватар пользователя" class="w-16 h-16 rounded-full mr-4">
+            <div>
+                <h1 class="text-2xl font-bold">Профиль пользователя</h1>
+                <div class="flex space-x-4 mt-2">
+                    <a href="https://t.me/yourtelegram" target="_blank" class="text-blue-500"><i class="fab fa-telegram fa-2x"></i></a>
+                    <a href="https://wa.me/yourwhatsapp" target="_blank" class="text-green-500"><i class="fab fa-whatsapp fa-2x"></i></a>
+                </div>
+            </div>
+        </div>
+        <h1 class="text-2xl font-bold mb-6 text-center">Продажа подписок</h1>
+        <form>
+            <div class="mb-4">
+                <label for="yandex-reviews" class="block text-gray-700 font-bold mb-2">Отзывы в Яндекс картах (<span id="yandex-price">200</span> рублей за отзыв):</label>
+                <input type="number" id="yandex-reviews" name="yandex-reviews" min="0" max="20" value="0" class="w-full p-2 border border-gray-300 rounded" oninput="calculateTotal()">
+            </div>
+            <div class="mb-4">
+                <label for="gis-reviews" class="block text-gray-700 font-bold mb-2">Отзывы в 2ГИС (<span id="gis-price">150</span> рублей за отзыв):</label>
+                <input type="number" id="gis-reviews" name="gis-reviews" min="0" max="20" value="0" class="w-full p-2 border border-gray-300 rounded" oninput="calculateTotal()">
+            </div>
+            <div class="mb-4">
+                <label for="avito-reviews" class="block text-gray-700 font-bold mb-2">Отзывы переговоры в Авито (<span id="avito-price">300</span> рублей за отзыв):</label>
+                <input type="number" id="avito-reviews" name="avito-reviews" min="0" max="20" value="0" class="w-full p-2 border border-gray-300 rounded" oninput="calculateTotal()">
+            </div>
+            <div class="mb-6">
+                <p class="text-gray-700 font-bold">Итоговая сумма: <span id="total-amount">0 рублей</span></p>
+            </div>
+            <button type="button" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 mb-4" onclick="addToCart()">Добавить в корзину</button>
+            <button type="button" class="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600" onclick="pay()">Оплатить</button>
+        </form>
+    </div>
+
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl mt-10">
+        <h2 class="text-xl font-bold mb-4">Корзина</h2>
+        <ul id="cart-items" class="list-disc pl-5 text-gray-700">
+            <!-- Items will be added here -->
+        </ul>
+    </div>
+
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl mt-10">
+        <h2 class="text-xl font-bold mb-4">Рекомендации</h2>
+        <div id="recommendations" class="text-gray-700">
+            <!-- Recommendations will be displayed here -->
+        </div>
+    </div>
+
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl mt-10">
+        <h2 class="text-xl font-bold mb-4">Реклама</h2>
+        <div id="ads" class="text-gray-700">
+            <!-- Ads will be displayed here -->
+        </div>
+    </div>
+
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl mt-10 hidden" id="admin-section">
+        <h2 class="text-xl font-bold mb-4">Администратор</h2>
+        <div class="mb-4">
+            <label for="admin-yandex-price" class="block text-gray-700 font-bold mb-2">Цена за отзыв в Яндекс картах:</label>
+            <input type="number" id="admin-yandex-price" name="admin-yandex-price" value="200" class="w-full p-2 border border-gray-300 rounded">
+        </div>
+        <div class="mb-4">
+            <label for="admin-gis-price" class="block text-gray-700 font-bold mb-2">Цена за отзыв в 2ГИС:</label>
+            <input type="number" id="admin-gis-price" name="admin-gis-price" value="150" class="w-full p-2 border border-gray-300 rounded">
+        </div>
+        <div class="mb-4">
+            <label for="admin-avito-price" class="block text-gray-700 font-bold mb-2">Цена за отзыв в Авито:</label>
+            <input type="number" id="admin-avito-price" name="admin-avito-price" value="300" class="w-full p-2 border border-gray-300 rounded">
+        </div>
+        <button type="button" class="w-full bg-red-500 text-white p-2 rounded hover:bg-red-600" onclick="updatePrices()">Обновить цены</button>
+        <h2 class="text-xl font-bold mb-4 mt-6">Заявки</h2>
+        <div id="admin-orders" class="text-gray-700">
+            <!-- Orders will be displayed here -->
+        </div>
+        <h2 class="text-xl font-bold mb-4 mt-6">Добавить рекомендацию</h2>
+        <div class="mb-4">
+            <label for="recommendation-text" class="block text-gray-700 font-bold mb-2">Текст рекомендации:</label>
+            <textarea id="recommendation-text" name="recommendation-text" class="w-full p-2 border border-gray-300 rounded"></textarea>
+        </div>
+        <div class="mb-4">
+            <label for="recommendation-image" class="block text-gray-700 font-bold mb-2">Изображение рекомендации:</label>
+            <input type="file" id="recommendation-image" name="recommendation-image" class="w-full p-2 border border-gray-300 rounded">
+        </div>
+        <button type="button" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600" onclick="addRecommendation()">Добавить рекомендацию</button>
+        <h2 class="text-xl font-bold mb-4 mt-6">Добавить рекламу</h2>
+        <div class="mb-4">
+            <label for="ad-text" class="block text-gray-700 font-bold mb-2">Текст рекламы:</label>
+            <textarea id="ad-text" name="ad-text" class="w-full p-2 border border-gray-300 rounded"></textarea>
+        </div>
+        <div class="mb-4">
+            <label for="ad-image" class="block text-gray-700 font-bold mb-2">Изображение рекламы:</label>
+            <input type="file" id="ad-image" name="ad-image" class="w-full p-2 border border-gray-300 rounded">
+        </div>
+        <button type="button" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600" onclick="addAd()">Добавить рекламу</button>
+    </div>
+
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl mt-10 hidden" id="admin-login-section">
+        <h2 class="text-xl font-bold mb-4">Вход в административный режим</h2>
+        <div class="mb-4">
+            <label for="admin-username" class="block text-gray-700 font-bold mb-2">Логин:</label>
+            <input type="text" id="admin-username" name="admin-username" class="w-full p-2 border border-gray-300 rounded">
+        </div>
+        <div class="mb-4">
+            <label for="admin-password" class="block text-gray-700 font-bold mb-2">Пароль:</label>
+            <input type="password" id="admin-password" name="admin-password" class="w-full p-2 border border-gray-300 rounded">
+        </div>
+        <button type="button" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600" onclick="adminLogin()">Войти</button>
+    </div>
+
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl mt-10 hidden" id="payment-modal">
+        <h2 class="text-xl font-bold mb-4">Оплата</h2>
+        <p id="payment-amount" class="text-gray-700 font-bold mb-4"></p>
+        <div class="mb-4">
+            <label for="payment-method" class="block text-gray-700 font-bold mb-2">Способ оплаты:</label>
+            <input type="radio" id="payment-method-1" name="payment-method" value="card">
+            <label for="payment-method-1" class="ml-2">Карта</label>
+            <br>
+            <input type="radio" id="payment-method-2" name="payment-method" value="wallet">
+            <label for="payment-method-2" class="ml-2">Кошелек</label>
+        </div>
+        <button type="button" class="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600" onclick="processPayment()">Оплатить</button>
+        <button type="button" class="w-full bg-red-500 text-white p-2 rounded hover:bg-red-600" onclick="closePaymentModal()">Отмена</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleAdminMode();
+        });
+    </script>
+</body>
+</html>
