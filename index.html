@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тестовый полигон</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1a1a1a, #333);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(45deg, #ff6f61, #ff3b2f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .btn {
+            background: linear-gradient(45deg, #ff6f61, #ff3b2f);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 111, 97, 0.4);
+        }
+        .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(255, 111, 97, 0.6);
+        }
+        @keyframes glow {
+            0% { box-shadow: 0 0 10px rgba(255, 111, 97, 0.6); }
+            50% { box-shadow: 0 0 20px rgba(255, 111, 97, 0.8); }
+            100% { box-shadow: 0 0 10px rgba(255, 111, 97, 0.6); }
+        }
+        .container {
+            animation: glow 3s infinite;
+        }
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 111, 97, 0.2), transparent);
+            animation: moveBackground 10s infinite linear;
+            z-index: 0;
+        }
+        @keyframes moveBackground {
+            0% { transform: translate(-50%, -50%); }
+            100% { transform: translate(50%, 50%); }
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container">
+        <h1>Тестовый полигон</h1>
+        <p>Этот сайт создан для проверки твоих скриптов. Нагружай  на полную и смотри, как он справляется!</p>
+        <button class="btn">Взрывной тест!</button>
+    </div>
+</body>
+</html>
