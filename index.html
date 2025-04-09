@@ -1,91 +1,291 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тестовый полигон</title>
-    <style>
-        body {
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Cyber Attack Encyclopedia
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   body {
+            background-color: #0d1117;
+            color: #c9d1d9;
             font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #1a1a1a, #333);
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-            overflow: hidden;
         }
-        .container {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            max-width: 600px;
-            position: relative;
-            z-index: 1;
-        }
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-            background: linear-gradient(45deg, #ff6f61, #ff3b2f);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        p {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-        .btn {
-            background: linear-gradient(45deg, #ff6f61, #ff3b2f);
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 111, 97, 0.4);
-        }
-        .btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 20px rgba(255, 111, 97, 0.6);
-        }
-        @keyframes glow {
-            0% { box-shadow: 0 0 10px rgba(255, 111, 97, 0.6); }
-            50% { box-shadow: 0 0 20px rgba(255, 111, 97, 0.8); }
-            100% { box-shadow: 0 0 10px rgba(255, 111, 97, 0.6); }
-        }
-        .container {
-            animation: glow 3s infinite;
-        }
-        .background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(255, 111, 97, 0.2), transparent);
-            animation: moveBackground 10s infinite linear;
-            z-index: 0;
-        }
-        @keyframes moveBackground {
-            0% { transform: translate(-50%, -50%); }
-            100% { transform: translate(50%, 50%); }
-        }
-    </style>
-</head>
-<body>
-    <div class="background"></div>
-    <div class="container">
-        <h1>Тестовый полигон</h1>
-        <p>Этот сайт создан для проверки твоих скриптов. Нагружай  на полную и смотри, как он справляется!</p>
-        <button class="btn">Взрывной тест!</button>
+  </style>
+ </head>
+ <body class="bg-gray-900 text-white">
+  <div class="flex flex-col lg:flex-row">
+   <!-- Sidebar -->
+   <div class="w-full lg:w-1/5 bg-gray-800 h-auto lg:h-screen p-4">
+    <div class="flex items-center mb-6">
+     <img alt="Logo" class="mr-2" height="40" src="https://storage.googleapis.com/a1aa/image/X8XU5g6-QwycrJ0aMFYhx7KVyJalPpOIyizi9rO2mSg.jpg" width="40"/>
+     <span class="text-xl font-bold">
+      Cyber Attack Encyclopedia
+     </span>
     </div>
-</body>
+    <nav class="space-y-4">
+        <a class="flex items-center p-2" href="index.html">
+            <i class="fas fa-home mr-2"></i>
+            Главная
+        </a>
+        <a class="flex items-center p-2" href="sql.html">
+            <i class="fas fa-database mr-2"></i>
+            SQL инъекции
+        </a>
+        <a class="flex items-center p-2" href="veb.html">
+            <i class="fas fa-globe mr-2"></i>        <a class="flex items-center p-2 bg-gray-700 rounded" href="drugie.html">
+            <i class="fas fa-shield-alt mr-2"></i>
+            Другие виды атак
+        </a>
+            Атаки на веб-сайты
+        </a>
+        <a class="flex items-center p-2" href="wi-fi">
+            <i class="fas fa-wifi mr-2"></i>
+            Атаки на Wi-Fi
+        </a>
+        <a class="flex items-center p-2" href="troyan.html">
+            <i class="fas fa-bug mr-2"></i>
+            Трояны
+        </a>
+        <a class="flex items-center p-2" href="cherv.html">
+            <i class="fas fa-virus mr-2"></i>
+            Черви
+        </a>
+        <a class="flex items-center p-2 bg-gray-700 rounded" href="drugie.html">
+            <i class="fas fa-shield-alt mr-2"></i>
+            Другие виды атак
+        </a>
+    </nav>
+</div>
+   <!-- Main Content -->
+   <div class="w-full lg:w-4/5 p-6">
+    <div class="flex flex-col lg:flex-row justify-between items-center mb-6">
+     <h1 class="text-3xl font-bold mb-4 lg:mb-0">
+      Добро пожаловать в Справочник Кибер Атак
+     </h1>
+     <div class="flex items-center space-x-4">
+      <i class="fas fa-bell">
+      </i>
+      <span>
+       20
+      </span>
+      <i class="fas fa-envelope">
+      </i>
+      <span>
+       20
+      </span>
+      <span>
+       Nickname
+      </span>
+      <img alt="User Avatar" class="rounded-full" height="40" src="https://storage.googleapis.com/a1aa/image/gOQ0qIi5BkPSbXZ6DradujT1M35Iq94gDTElV0jnaMc.jpg" width="40"/>
+     </div>
+    </div>
+    <div class="bg-gray-800 p-6 rounded mb-6">
+     <h2 class="text-2xl mb-4">
+      Мы расскажем и покажем, как происходят атаки и кибер атаки, и как от них защититься
+     </h2>
+     <p>
+      В нашем справочнике вы найдете подробную информацию о различных видах кибер атак, их методах и способах защиты. Мы поможем вам понять, как злоумышленники могут атаковать ваши системы и данные, и что вы можете сделать, чтобы защитить себя.
+     </p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+     <!-- Introduction Card -->
+     <div class="col-span-1 lg:col-span-3 bg-gray-800 p-6 rounded">
+      <h2 class="text-2xl mb-4">
+       Что такое кибер атака?
+      </h2>
+      <p>
+       Кибер атака - это любое действие, направленное на получение несанкционированного доступа к данным, системам или сетям с целью кражи, изменения или уничтожения информации, а также для нанесения вреда или нарушения работы систем.
+      </p>
+     </div>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+     <!-- SQL Injection -->
+     <div class="bg-gray-800 p-4 rounded">
+      <h2 class="text-xl mb-4">
+       SQL инъекции
+      </h2>
+      <p>
+       SQL инъекции - это тип атаки, при котором злоумышленник вставляет вредоносный SQL-код в запрос к базе данных, чтобы получить несанкционированный доступ к данным.
+      </p>
+      <button class="mt-4 w-full bg-blue-600 p-2 rounded">
+       Узнать больше
+      </button>
+     </div>
+     <!-- Web Attacks -->
+     <div class="bg-gray-800 p-4 rounded">
+      <h2 class="text-xl mb-4">
+       Атаки на веб-сайты
+      </h2>
+      <p>
+       Атаки на веб-сайты включают в себя различные методы, такие как XSS, CSRF, и DDoS, направленные на нарушение работы веб-сайтов или кражу данных пользователей.
+      </p>
+      <button class="mt-4 w-full bg-blue-600 p-2 rounded">
+       Узнать больше
+      </button>
+     </div>
+     <!-- Wi-Fi Attacks -->
+     <div class="bg-gray-800 p-4 rounded">
+      <h2 class="text-xl mb-4">
+       Атаки на Wi-Fi
+      </h2>
+      <p>
+       Атаки на Wi-Fi включают в себя методы, такие как перехват трафика, взлом паролей и атаки типа "человек посередине" для получения несанкционированного доступа к сети.
+      </p>
+      <button class="mt-4 w-full bg-blue-600 p-2 rounded">
+       Узнать больше
+      </button>
+     </div>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+     <!-- Trojans -->
+     <div class="bg-gray-800 p-4 rounded">
+      <h2 class="text-xl mb-4">
+       Трояны
+      </h2>
+      <p>
+       Трояны - это вредоносные программы, которые маскируются под легитимное ПО, чтобы получить доступ к системе и нанести вред или украсть данные.
+      </p>
+      <button class="mt-4 w-full bg-blue-600 p-2 rounded">
+       Узнать больше
+      </button>
+     </div>
+     <!-- Worms -->
+     <div class="bg-gray-800 p-4 rounded">
+      <h2 class="text-xl mb-4">
+       Черви
+      </h2>
+      <p>
+       Черви - это вредоносные программы, которые распространяются по сети, копируя себя на другие компьютеры без необходимости вмешательства пользователя.
+      </p>
+      <button class="mt-4 w-full bg-blue-600 p-2 rounded">
+       Узнать больше
+      </button>
+     </div>
+     <!-- Other Attacks -->
+     <div class="bg-gray-800 p-4 rounded">
+      <h2 class="text-xl mb-4">
+       Другие виды атак
+      </h2>
+      <p>
+       Существует множество других видов кибер атак, таких как фишинг, атаки на социальную инженерию, атаки на IoT и многое другое.
+      </p>
+      <button class="mt-4 w-full bg-blue-600 p-2 rounded">
+       Узнать больше
+      </button>
+     </div>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+     <!-- Attack Statistics -->
+     <div class="bg-gray-800 p-4 rounded">
+      <h2 class="text-xl mb-4">
+       Статистика атак
+      </h2>
+      <canvas id="attackStatsChart">
+      </canvas>
+     </div>
+     <!-- Attack Trends -->
+     <div class="bg-gray-800 p-4 rounded">
+      <h2 class="text-xl mb-4">
+       Тренды атак
+      </h2>
+      <canvas id="attackTrendsChart">
+      </canvas>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js">
+  </script>
+  <script>
+   const attackStatsCtx = document.getElementById('attackStatsChart').getContext('2d');
+        const attackStatsChart = new Chart(attackStatsCtx, {
+            type: 'pie',
+            data: {
+                labels: ['SQL инъекции', 'Атаки на веб-сайты', 'Атаки на Wi-Fi', 'Трояны', 'Черви', 'Другие'],
+                datasets: [{
+                    data: [25, 20, 15, 10, 10, 20],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        const attackTrendsCtx = document.getElementById('attackTrendsChart').getContext('2d');
+        const attackTrendsChart = new Chart(attackTrendsCtx, {
+            type: 'line',
+            data: {
+                labels: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн'],
+                datasets: [{
+                    label: 'SQL инъекции',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    fill: false,
+                    tension: 0.1
+                }, {
+                    label: 'Атаки на веб-сайты',
+                    data: [15, 10, 5, 2, 20, 30],
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    fill: false,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.dataset.label + ': ' + tooltipItem.raw;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+  </script>
+ </body>
 </html>

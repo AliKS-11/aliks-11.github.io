@@ -1,0 +1,243 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Web Attacks - Cyber Attack Encyclopedia
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: 'Arial', sans-serif;
+        }
+  </style>
+ </head>
+ <body class="bg-gray-900 text-white">
+  <div class="flex flex-col lg:flex-row">
+   <!-- Sidebar -->
+   <div class="w-full lg:w-1/5 bg-gray-800 h-auto lg:h-screen p-4">
+    <div class="flex items-center mb-6">
+     <img alt="Logo" class="mr-2" height="40" src="https://storage.googleapis.com/a1aa/image/X8XU5g6-QwycrJ0aMFYhx7KVyJalPpOIyizi9rO2mSg.jpg" width="40"/>
+     <span class="text-xl font-bold">
+      Cyber Attack Encyclopedia
+     </span>
+    </div>
+    <nav class="space-y-4">
+        <a class="flex items-center p-2" href="index.html">
+            <i class="fas fa-home mr-2"></i>
+            Главная
+        </a>
+        <a class="flex items-center p-2" href="sql.html">
+            <i class="fas fa-database mr-2"></i>
+            SQL инъекции
+        </a>
+        <a class="flex items-center p-2" href="veb.html">
+            <i class="fas fa-globe mr-2"></i>        <a class="flex items-center p-2 bg-gray-700 rounded" href="drugie.html">
+            <i class="fas fa-shield-alt mr-2"></i>
+            Другие виды атак
+        </a>
+            Атаки на веб-сайты
+        </a>
+        <a class="flex items-center p-2" href="wi-fi">
+            <i class="fas fa-wifi mr-2"></i>
+            Атаки на Wi-Fi
+        </a>
+        <a class="flex items-center p-2" href="troyan.html">
+            <i class="fas fa-bug mr-2"></i>
+            Трояны
+        </a>
+        <a class="flex items-center p-2" href="cherv.html">
+            <i class="fas fa-virus mr-2"></i>
+            Черви
+        </a>
+        <a class="flex items-center p-2 bg-gray-700 rounded" href="drugie.html">
+            <i class="fas fa-shield-alt mr-2"></i>
+            Другие виды атак
+        </a>
+    </nav>
+   </div>
+   <!-- Main Content -->
+   <div class="w-full lg:w-4/5 p-6">
+    <div class="flex flex-col lg:flex-row justify-between items-center mb-6">
+     <h1 class="text-3xl font-bold mb-4 lg:mb-0">
+      Атаки на веб-сайты
+     </h1>
+     <div class="flex items-center space-x-4">
+      <i class="fas fa-bell">
+      </i>
+      <span>
+       20
+      </span>
+      <i class="fas fa-envelope">
+      </i>
+      <span>
+       20
+      </span>
+      <span>
+       Nickname
+      </span>
+      <img alt="User Avatar" class="rounded-full" height="40" src="https://storage.googleapis.com/a1aa/image/gOQ0qIi5BkPSbXZ6DradujT1M35Iq94gDTElV0jnaMc.jpg" width="40"/>
+     </div>
+    </div>
+    <div class="bg-gray-800 p-6 rounded mb-6">
+     <h2 class="text-2xl mb-4">
+      Что такое атаки на веб-сайты?
+     </h2>
+     <p>
+      Атаки на веб-сайты включают в себя различные методы, направленные на нарушение работы веб-сайтов, кражу данных пользователей или получение несанкционированного доступа к системам. Эти атаки могут быть направлены на серверы, базы данных, приложения и пользователей.
+     </p>
+    </div>
+    <div class="bg-gray-800 p-6 rounded mb-6">
+     <h2 class="text-2xl mb-4">
+      XSS (Cross-Site Scripting) атаки
+     </h2>
+     <p>
+      XSS атаки позволяют злоумышленникам внедрять вредоносные скрипты на веб-страницы, которые затем выполняются в браузерах пользователей. Это может привести к краже данных, подделке запросов и другим вредоносным действиям.
+     </p>
+     <div class="mt-4">
+      <img alt="Пример атаки XSS" class="w-full rounded" height="300" src="https://www.cloudflare.com/img/learning/security/threats/cross-site-scripting/xss-attack.png" width="600"/>
+     </div>
+     <h3 class="text-xl mt-6 mb-4">
+      Как защититься от XSS атак?
+     </h3>
+     <ul class="list-disc pl-5">
+      <li>
+       Валидация и фильтрация пользовательского ввода: Всегда проверяйте и фильтруйте данные, вводимые пользователями, чтобы убедиться, что они не содержат вредоносных скриптов.
+      </li>
+      <li>
+       Использование контекстно-зависимого экранирования: Экранируйте данные в зависимости от контекста, в котором они используются (HTML, JavaScript, CSS, URL и т.д.).
+      </li>
+      <li>
+       Использование Content Security Policy (CSP): CSP позволяет ограничить источники, с которых можно загружать скрипты, что помогает предотвратить выполнение вредоносных скриптов.
+      </li>
+      <li>
+       Регулярное обновление и патчинг веб-приложений и библиотек: Убедитесь, что все используемые библиотеки и фреймворки обновлены до последних версий, чтобы избежать уязвимостей.
+      </li>
+     </ul>
+    </div>
+    <div class="bg-gray-800 p-6 rounded mb-6">
+     <h2 class="text-2xl mb-4">
+      Clickjacking атаки
+     </h2>
+     <p>
+      Clickjacking атаки заставляют пользователей выполнять нежелательные действия, такие как нажатие на скрытые кнопки или ссылки, путем наложения невидимых элементов на легитимные веб-страницы.
+     </p>
+     <div class="mt-4">
+      <img alt="Пример атаки Clickjacking" class="w-full rounded" height="300" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHLv6Y6SHfpPW24OAHOjcfjjar0MckoLU3eg&s" width="600"/>
+     </div>
+     <h3 class="text-xl mt-6 mb-4">
+      Как защититься от Clickjacking атак?
+     </h3>
+     <ul class="list-disc pl-5">
+      <li>
+       Использование заголовка X-Frame-Options: Этот заголовок HTTP позволяет указать, может ли ваш сайт быть загружен в iframe. Установите его значение на "DENY" или "SAMEORIGIN", чтобы предотвратить Clickjacking.
+      </li>
+      <li>
+       Использование Content Security Policy (CSP) с директивой frame-ancestors: Эта директива позволяет указать, какие источники могут встраивать ваш сайт в iframe.
+      </li>
+      <li>
+       Регулярное тестирование и аудит безопасности: Проводите регулярные тесты безопасности и аудиты, чтобы выявить и устранить уязвимости.
+      </li>
+     </ul>
+     <div class="mt-6">
+      <h3 class="text-xl mb-4">
+       Проверьте свой сайт на наличие Clickjacking
+      </h3>
+      <div class="bg-gray-900 p-4 rounded">
+       <label class="block mb-2" for="urlInput">
+        Введите URL вашего сайта:
+       </label>
+       <input class="w-full p-2 mb-4 bg-gray-700 rounded" id="urlInput" placeholder="https://example.com" type="text"/>
+       <button class="w-full bg-blue-600 p-2 rounded" onclick="checkClickjacking()">
+        Проверить
+       </button>
+       <div class="mt-4" id="iframeContainer">
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="bg-gray-800 p-6 rounded mb-6">
+     <h2 class="text-2xl mb-4">
+      DoS и DDoS атаки
+     </h2>
+     <p>
+      DoS (Denial of Service) и DDoS (Distributed Denial of Service) атаки направлены на перегрузку серверов или сетей, чтобы сделать веб-сайты или сервисы недоступными для пользователей. DDoS атаки используют множество скомпрометированных устройств для одновременной отправки большого количества запросов.
+     </p>
+     <div class="mt-4">
+      <img alt="Пример атаки DDoS" class="w-full rounded" height="300" src="https://cf-assets.www.cloudflare.com/slt3lc6tev37/1FIBEeoyzoa64lVGlWKaRV/3b878bb03df1729b48cd3f667cdfe3de/amplification_ddos_example.png" width="600"/>
+     </div>
+     <h3 class="text-xl mt-6 mb-4">
+      Как защититься от DoS и DDoS атак?
+     </h3>
+     <ul class="list-disc pl-5">
+      <li>
+       Использование CDN (Content Delivery Network): CDN может помочь распределить нагрузку и уменьшить влияние DDoS атак.
+      </li>
+      <li>
+       Настройка и использование WAF (Web Application Firewall): WAF может фильтровать вредоносный трафик и блокировать атаки.
+      </li>
+      <li>
+       Ограничение скорости запросов: Настройте серверы и сети для ограничения количества запросов от одного источника.
+      </li>
+      <li>
+       Мониторинг и анализ трафика: Используйте инструменты мониторинга для выявления аномалий в трафике и быстрого реагирования на атаки.
+      </li>
+      <li>
+       Планы реагирования на инциденты: Разработайте и протестируйте планы реагирования на инциденты, чтобы быть готовыми к атакам.
+      </li>
+     </ul>
+    </div>
+    <div class="bg-gray-800 p-6 rounded mb-6">
+     <h2 class="text-2xl mb-4">
+      Другие виды атак на веб-сайты
+     </h2>
+     <p>
+      Существуют и другие виды атак на веб-сайты, такие как CSRF (Cross-Site Request Forgery), атаки на уязвимости в веб-приложениях, атаки на базы данных и многое другое.
+     </p>
+     <ul class="list-disc pl-5 mt-4">
+      <li>
+       CSRF атаки заставляют пользователей выполнять нежелательные действия на веб-сайтах, на которых они аутентифицированы.
+      </li>
+      <li>
+       Атаки на уязвимости в веб-приложениях могут включать в себя эксплуатацию ошибок в коде или конфигурации.
+      </li>
+      <li>
+       Атаки на базы данных могут включать в себя SQL инъекции и другие методы для получения несанкционированного доступа к данным.
+      </li>
+     </ul>
+     <h3 class="text-xl mt-6 mb-4">
+      Как защититься от других видов атак?
+     </h3>
+     <ul class="list-disc pl-5">
+      <li>
+       Использование токенов CSRF: Включите токены CSRF в формы и запросы, чтобы предотвратить подделку запросов.
+      </li>
+      <li>
+       Регулярное обновление и патчинг: Убедитесь, что все используемые библиотеки, фреймворки и серверы обновлены до последних версий.
+      </li>
+      <li>
+       Валидация и фильтрация пользовательского ввода: Проверяйте и фильтруйте все данные, вводимые пользователями, чтобы предотвратить эксплуатацию уязвимостей.
+      </li>
+      <li>
+       Ограничение прав доступа: Ограничьте права доступа к базам данных и системам, чтобы минимизировать потенциальный ущерб.
+      </li>
+      <li>
+       Регулярное тестирование безопасности: Проводите регулярные тесты безопасности и аудиты, чтобы выявить и устранить уязвимости.
+      </li>
+     </ul>
+    </div>
+   </div>
+  </div>
+  <script>
+   function checkClickjacking() {
+            const url = document.getElementById('urlInput').value;
+            const iframeContainer = document.getElementById('iframeContainer');
+            iframeContainer.innerHTML = `<iframe src="${url}" class="w-full h-64 border-2 border-gray-700 rounded"></iframe>`;
+        }
+  </script>
+ </body>
+</html>

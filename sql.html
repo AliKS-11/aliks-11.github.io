@@ -1,0 +1,149 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   SQL Injection - Cyber Attack Encyclopedia
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: 'Arial', sans-serif;
+        }
+  </style>
+ </head>
+ <body class="bg-gray-900 text-white">
+  <div class="flex flex-col lg:flex-row">
+   <!-- Sidebar -->
+   <div class="w-full lg:w-1/5 bg-gray-800 h-auto lg:h-screen p-4">
+    <div class="flex items-center mb-6">
+     <img alt="Logo" class="mr-2" height="40" src="https://storage.googleapis.com/a1aa/image/X8XU5g6-QwycrJ0aMFYhx7KVyJalPpOIyizi9rO2mSg.jpg" width="40"/>
+     <span class="text-xl font-bold">
+      Cyber Attack Encyclopedia
+     </span>
+    </div>
+    <nav class="space-y-4">
+        <a class="flex items-center p-2" href="index.html">
+            <i class="fas fa-home mr-2"></i>
+            Главная
+        </a>
+        <a class="flex items-center p-2" href="sql.html">
+            <i class="fas fa-database mr-2"></i>
+            SQL инъекции
+        </a>
+        <a class="flex items-center p-2" href="veb.html">
+            <i class="fas fa-globe mr-2"></i>        <a class="flex items-center p-2 bg-gray-700 rounded" href="drugie.html">
+            <i class="fas fa-shield-alt mr-2"></i>
+            Другие виды атак
+        </a>
+            Атаки на веб-сайты
+        </a>
+        <a class="flex items-center p-2" href="wi-fi">
+            <i class="fas fa-wifi mr-2"></i>
+            Атаки на Wi-Fi
+        </a>
+        <a class="flex items-center p-2" href="troyan.html">
+            <i class="fas fa-bug mr-2"></i>
+            Трояны
+        </a>
+        <a class="flex items-center p-2" href="cherv.html">
+            <i class="fas fa-virus mr-2"></i>
+            Черви
+        </a>
+        <a class="flex items-center p-2 bg-gray-700 rounded" href="drugie.html">
+            <i class="fas fa-shield-alt mr-2"></i>
+            Другие виды атак
+        </a>
+    </nav>
+   </div>
+   <!-- Main Content -->
+   <div class="w-full lg:w-4/5 p-6">
+    <div class="flex flex-col lg:flex-row justify-between items-center mb-6">
+     <h1 class="text-3xl font-bold mb-4 lg:mb-0">
+      SQL инъекции
+     </h1>
+     <div class="flex items-center space-x-4">
+      <i class="fas fa-bell">
+      </i>
+      <span>
+       20
+      </span>
+      <i class="fas fa-envelope">
+      </i>
+      <span>
+       20
+      </span>
+      <span>
+       Nickname
+      </span>
+      <img alt="User Avatar" class="rounded-full" height="40" src="https://storage.googleapis.com/a1aa/image/gOQ0qIi5BkPSbXZ6DradujT1M35Iq94gDTElV0jnaMc.jpg" width="40"/>
+     </div>
+    </div>
+    <div class="bg-gray-800 p-6 rounded mb-6">
+     <h2 class="text-2xl mb-4">
+      Что такое SQL инъекции?
+     </h2>
+     <p>
+      SQL инъекции - это тип атаки, при котором злоумышленник вставляет вредоносный SQL-код в запрос к базе данных, чтобы получить несанкционированный доступ к данным или выполнить произвольные команды на сервере базы данных.
+     </p>
+    </div>
+    <div class="bg-gray-800 p-6 rounded mb-6">
+     <h2 class="text-2xl mb-4">
+      Как работают SQL инъекции?
+     </h2>
+     <p>
+      SQL инъекции работают путем вставки или "инъекции" SQL-кода в запрос, который выполняется сервером базы данных. Это может позволить злоумышленнику просматривать, изменять или удалять данные в базе данных, а также выполнять административные операции на базе данных.
+     </p>
+     <div class="mt-4">
+      <img alt="SQL Injection Example" class="w-full rounded" height="300" src="https://storage.googleapis.com/a1aa/image/bAFx0jLeJZFKH75Ba19nWxStVH9q3lG5GzHBt5yX3Y0.jpg" width="600"/>
+     </div>
+    </div>
+    <div class="bg-gray-800 p-6 rounded mb-6">
+     <h2 class="text-2xl mb-4">
+      Примеры SQL инъекций
+     </h2>
+     <p>
+      Рассмотрим пример SQL инъекции, где злоумышленник вводит вредоносный код в поле ввода формы на веб-сайте:
+     </p>
+     <pre class="bg-gray-900 p-4 rounded mt-4 overflow-auto">
+        <code class="text-green-400">
+            SELECT * FROM users WHERE username = 'admin' --' AND password = 'password';
+        </code>
+     </pre>
+     <p class="mt-4">
+      В этом примере злоумышленник использует комментарий SQL (--) для игнорирования части запроса, что позволяет ему обойти проверку пароля.
+     </p>
+    </div>
+    <div class="bg-gray-800 p-6 rounded mb-6">
+     <h2 class="text-2xl mb-4">
+      Как защититься от SQL инъекций?
+     </h2>
+     <p>
+      Существует несколько методов защиты от SQL инъекций:
+     </p>
+     <ul class="list-disc pl-5 mt-4">
+      <li>
+       Использование подготовленных выражений (prepared statements) с параметризованными запросами.
+      </li>
+      <li>
+       Использование ORM (Object-Relational Mapping) библиотек, которые автоматически обрабатывают параметры запросов.
+      </li>
+      <li>
+       Валидация и фильтрация пользовательского ввода.
+      </li>
+      <li>
+       Ограничение прав доступа к базе данных.
+      </li>
+      <li>
+       Регулярное обновление и патчинг серверов базы данных и веб-приложений.
+      </li>
+     </ul>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
